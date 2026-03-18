@@ -1064,5 +1064,13 @@ export const translations: Record<Language, Record<string, string>> = {
     "chat.placeholder": "Vraag me hoe je je site kunt verbeteren...",
     "chat.send": "Verzenden",
     "ad.text": "Advertentieruimte",
+    "prompt.badge": "AI Fix Prompt",
+    "prompt.title": "AI Fix Prompt (Gebruik in Elke AI-Tool)",
+    "prompt.subtitle": "Genereer een kant-en-klare prompt om je site te repareren met elke AI-tool.",
+    "prompt.button": "Fix Prompt Genereren 🧠",
+    "prompt.generating": "Prompt wordt gegenereerd...",
+    "prompt.copy": "Prompt Kopiëren",
+    "prompt.regenerate": "Opnieuw Genereren",
+    "prompt.helper": "Gebruik deze prompt in AI-websitebouwers of code-assistenten om je site direct te repareren.",
   },
 };
