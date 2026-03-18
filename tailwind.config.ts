@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Geist Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        mono: ['"Geist Mono"', '"SF Mono"', '"Fira Code"', 'monospace'],
+        sans: ['"Space Grotesk"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"SF Mono"', '"Fira Code"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,6 +54,11 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        flame: {
+          orange: "hsl(var(--flame-orange))",
+          red: "hsl(var(--flame-red))",
+          yellow: "hsl(var(--flame-yellow))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

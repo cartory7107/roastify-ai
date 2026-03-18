@@ -1,6 +1,6 @@
 import { useState, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Loader2 } from "lucide-react";
+import { Flame, Loader2 } from "lucide-react";
 
 interface URLInputSectionProps {
   onSubmit: (url: string) => void;
@@ -20,7 +20,6 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
         setError("Please enter a URL");
         return;
       }
-      // Basic URL validation
       try {
         const testUrl = trimmed.startsWith("http") ? trimmed : `https://${trimmed}`;
         new URL(testUrl);
@@ -35,11 +34,11 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
       <section ref={ref} className="relative mx-auto max-w-2xl px-4 py-16">
         <form onSubmit={handleSubmit} className="relative">
           <div
-            className={`glass-surface relative flex items-center gap-3 rounded-2xl p-2 transition-all ${
-              error ? "ring-2 ring-destructive/50" : "focus-within:ring-2 focus-within:ring-primary/50"
+            className={`relative flex items-center gap-3 rounded-2xl p-2 transition-all glass-surface ${
+              error ? "ring-2 ring-destructive/50" : "focus-within:ring-2 focus-within:ring-flame-orange/40"
             }`}
           >
-            <Search className="ml-3 h-5 w-5 shrink-0 text-muted-foreground" strokeWidth={1.5} />
+            <Flame className="ml-3 h-5 w-5 shrink-0 text-flame-orange/60" strokeWidth={1.5} />
             <input
               type="text"
               value={url}
@@ -54,9 +53,9 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
             <motion.button
               type="submit"
               disabled={isLoading}
-              whileHover={!isLoading ? { scale: 1.02 } : {}}
+              whileHover={!isLoading ? { scale: 1.02, boxShadow: "0 0 20px hsla(24, 100%, 50%, 0.4)" } : {}}
               whileTap={!isLoading ? { scale: 0.98 } : {}}
-              className="flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors disabled:opacity-60"
+              className="flex items-center gap-2 fire-gradient rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all disabled:opacity-60"
             >
               {isLoading ? (
                 <>
@@ -64,7 +63,7 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
                   Scanning
                 </>
               ) : (
-                "Roast My Website"
+                "Roast My Website 🔥"
               )}
             </motion.button>
           </div>
@@ -91,6 +90,7 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               className="mt-4 overflow-hidden rounded-xl glass-surface p-4"
+              style={{ boxShadow: "inset 0 0 0 1px var(--stroke-fire), 0 0 20px hsla(24, 100%, 50%, 0.1)" }}
             >
               <div className="relative overflow-hidden">
                 <div className="scan-line absolute inset-x-0 top-0 z-10" />
@@ -100,9 +100,9 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="font-mono text-xs text-primary/80"
+                    className="font-mono text-xs text-flame-orange/80"
                   >
-                    &gt; {log}
+                    🔥 {log}
                   </motion.p>
                 ))}
               </div>

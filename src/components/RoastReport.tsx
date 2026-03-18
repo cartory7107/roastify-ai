@@ -19,10 +19,10 @@ const RoastReport = ({ items }: RoastReportProps) => {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="mx-auto max-w-3xl px-4 py-12"
     >
-      <h2 className="mb-2 text-center text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-        Roast Report
+      <h2 className="mb-2 text-center text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        🔥 Roast Report
       </h2>
-      <p className="mb-8 text-center font-mono text-xs text-destructive/70">
+      <p className="mb-8 text-center font-mono text-xs text-flame-red/70">
         [{items.length} issues found]
       </p>
       <div className="space-y-4">
