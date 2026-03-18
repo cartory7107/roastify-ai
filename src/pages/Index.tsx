@@ -7,7 +7,9 @@ import QuickWins from "@/components/QuickWins";
 import ExportSection from "@/components/ExportSection";
 import PaywallSection from "@/components/PaywallSection";
 import FooterSection from "@/components/FooterSection";
-import { generateMockRoast, generateReportText, getScanMessages, type RoastResult } from "@/lib/mockRoast";
+import { generateReportText, getScanMessages, type RoastResult } from "@/lib/mockRoast";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,17 +28,47 @@ const Index = () => {
     setScanLogs([]);
     setAnalyzedUrl(url);
 
+    // Start scan log animation in parallel with real API call
     const messages = getScanMessages();
-    for (let i = 0; i < messages.length; i++) {
-      await new Promise((r) => setTimeout(r, 400 + Math.random() * 300));
-      setScanLogs((prev) => [...prev, messages[i]]);
-    }
+    let logIndex = 0;
+    const logInterval = setInterval(() => {
+      if (logIndex < messages.length) {
+        setScanLogs((prev) => [...prev, messages[logIndex]]);
+        logIndex++;
+      }
+    }, 600);
 
-    await new Promise((r) => setTimeout(r, 600));
-    const roastResult = generateMockRoast(url);
-    setResult(roastResult);
-    setIsLoading(false);
-    setScanLogs([]);
+    try {
+      const { data, error } = await supabase.functions.invoke('roast-website', {
+        body: { url },
+      });
+
+      clearInterval(logInterval);
+
+      if (error) {
+        console.error('Edge function error:', error);
+        toast.error(error.message || 'Failed to analyze website. Please try again.');
+        setIsLoading(false);
+        setScanLogs([]);
+        return;
+      }
+
+      if (data?.error) {
+        toast.error(data.error);
+        setIsLoading(false);
+        setScanLogs([]);
+        return;
+      }
+
+      setResult(data as RoastResult);
+    } catch (err) {
+      clearInterval(logInterval);
+      console.error('Roast error:', err);
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+      setScanLogs([]);
+    }
   }, []);
 
   const reportText = result ? generateReportText(analyzedUrl, result) : "";
