@@ -114,6 +114,8 @@ const Index = () => {
           <ScoreDashboard scores={result.scores} />
           <RoastReport items={result.roastItems} />
 
+          <TopCompetitors url={analyzedUrl} roastSummary={roastSummary} industry={undefined} />
+
           {competitorResult && competitorUrl && (
             <CompetitorComparison
               yourScores={result.scores}
