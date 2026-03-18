@@ -7,7 +7,9 @@ import QuickWins from "@/components/QuickWins";
 import ExportSection from "@/components/ExportSection";
 import PaywallSection from "@/components/PaywallSection";
 import FooterSection from "@/components/FooterSection";
-import { generateMockRoast, generateReportText, getScanMessages, type RoastResult } from "@/lib/mockRoast";
+import { generateReportText, getScanMessages, type RoastResult } from "@/lib/mockRoast";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(false);

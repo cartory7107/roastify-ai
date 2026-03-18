@@ -1,1 +1,4 @@
 project_id = "duozzbamlplvlaecsfos"
+
+[functions.roast-website]
+verify_jwt = false
