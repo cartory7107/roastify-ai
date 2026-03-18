@@ -21,7 +21,10 @@ serve(async (req) => {
     }
 
     const langMap: Record<string, string> = {
-      en: "English", bn: "Bangla", es: "Spanish", it: "Italian",
+      en: "English", bn: "Bangla", es: "Spanish", fr: "French", de: "German",
+      it: "Italian", pt: "Portuguese", hi: "Hindi", ur: "Urdu",
+      zh: "Chinese (Simplified)", ja: "Japanese", ko: "Korean",
+      ar: "Arabic", tr: "Turkish", ru: "Russian", nl: "Dutch",
     };
 
     let systemContent = `You are a helpful website improvement assistant from Cartory Roastify AI. Respond in ${langMap[language] || "English"}. Be concise, actionable, and friendly. Keep responses under 150 words.`;
