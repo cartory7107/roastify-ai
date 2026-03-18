@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import RoastCard from "./RoastCard";
+import { useLanguage } from "@/lib/i18n";
 
 export interface RoastItem {
   title: string;
@@ -12,18 +13,20 @@ interface RoastReportProps {
 }
 
 const RoastReport = ({ items }: RoastReportProps) => {
+  const { t } = useLanguage();
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="mx-auto max-w-3xl px-4 py-12"
+      className="mx-auto max-w-4xl px-4 py-12"
     >
       <h2 className="mb-2 text-center text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-        🔥 Roast Report
+        {t("report.title")}
       </h2>
       <p className="mb-8 text-center font-mono text-xs text-flame-red/70">
-        [{items.length} issues found]
+        [{items.length} {t("report.issues")}]
       </p>
       <div className="space-y-4">
         {items.map((item, i) => (

@@ -2,3 +2,9 @@ project_id = "duozzbamlplvlaecsfos"
 
 [functions.roast-website]
 verify_jwt = false
+
+[functions.fix-website]
+verify_jwt = false
+
+[functions.chat-assistant]
+verify_jwt = false

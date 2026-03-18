@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Copy, Check, FileDown } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 interface ExportSectionProps {
   reportText: string;
 }
 
 const ExportSection = ({ reportText }: ExportSectionProps) => {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -41,11 +43,11 @@ const ExportSection = ({ reportText }: ExportSectionProps) => {
         <AnimatePresence mode="wait">
           {copied ? (
             <motion.span key="check" initial={{ scale: 0.8 }} animate={{ scale: 1.1 }} exit={{ scale: 0.8 }} className="flex items-center gap-2 text-success">
-              <Check className="h-4 w-4" /> Copied!
+              <Check className="h-4 w-4" /> {t("export.copied")}
             </motion.span>
           ) : (
             <motion.span key="copy" className="flex items-center gap-2">
-              <Copy className="h-4 w-4" strokeWidth={1.5} /> Copy Report
+              <Copy className="h-4 w-4" strokeWidth={1.5} /> {t("export.copy")}
             </motion.span>
           )}
         </AnimatePresence>
@@ -57,7 +59,7 @@ const ExportSection = ({ reportText }: ExportSectionProps) => {
         whileTap={{ scale: 0.97 }}
         className="flex items-center gap-2 rounded-xl glass-surface px-6 py-3 text-sm font-semibold text-foreground transition-all"
       >
-        <FileDown className="h-4 w-4" strokeWidth={1.5} /> Download Report
+        <FileDown className="h-4 w-4" strokeWidth={1.5} /> {t("export.download")}
       </motion.button>
     </motion.section>
   );
