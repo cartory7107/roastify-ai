@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Mail, MessageCircle, Rocket, Flame, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
-import creatorImage from "@/assets/creator-placeholder.jpg";
+import creatorImage from "@/assets/creator-photo.png";
 
 const About = () => {
   return (
