@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Flame } from "lucide-react";
+import { Flame, User } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import roastifyLogo from "@/assets/roastify-logo.png";
 
@@ -22,7 +23,14 @@ const HeroSection = ({ onScrollToInput }: HeroSectionProps) => {
             <span className="text-[9px] font-semibold tracking-wider uppercase text-flame-orange leading-tight">Part of Cartory (GOC)</span>
           </div>
         </div>
-        <LanguageSwitcher />
+        <div className="flex items-center gap-2">
+          <Link to="/about" className="flex items-center gap-1.5 rounded-lg border border-border/60 bg-secondary/50 px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:border-flame-orange/30 transition-all">
+            <User className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Who Made This?</span>
+            <span className="sm:hidden">👤</span>
+          </Link>
+          <LanguageSwitcher />
+        </div>
       </div>
 
       {/* Fire background effects */}

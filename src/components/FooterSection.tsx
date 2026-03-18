@@ -1,4 +1,5 @@
 import { useLanguage } from "@/lib/i18n";
+import { Link } from "react-router-dom";
 
 const FooterSection = () => {
   const { t } = useLanguage();
@@ -12,6 +13,8 @@ const FooterSection = () => {
         <a href="#" className="hover:text-flame-orange transition-colors">Privacy Policy</a>
         <span className="text-border">·</span>
         <a href="#" className="hover:text-flame-orange transition-colors">Terms</a>
+        <span className="text-border">·</span>
+        <Link to="/about" className="hover:text-flame-orange transition-colors">👤 Who Made This?</Link>
       </div>
     </footer>
   );
