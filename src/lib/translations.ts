@@ -305,6 +305,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "topcomp.you": "Tú",
     "topcomp.them": "Ellos",
     "topcomp.whatBetter": "Donde te superan",
+    "topcomp.areasAhead": "áreas adelante",
     "topcomp.yourStrengths": "Donde tú ganas",
     "topcomp.winner": "Ganador",
     "topcomp.youWin": "¡Vas adelante!",
