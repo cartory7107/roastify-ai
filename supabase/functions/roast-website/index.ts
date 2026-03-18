@@ -91,11 +91,14 @@ serve(async (req) => {
     console.log('Signals extracted:', JSON.stringify(signals));
 
     // Step 2: Send to AI for roast analysis
-    const systemPrompt = `You are "Roastify AI", a brutally honest but helpful website critic. You analyze websites and provide scores, roast feedback, and actionable improvement tips.
+    const langMap: Record<string, string> = { en: "English", bn: "Bangla", es: "Spanish", it: "Italian" };
+    const industryContext = industry !== 'general' ? `\nThis is a ${industry} website. Tailor your analysis to ${industry} industry best practices.` : '';
+
+    const systemPrompt = `You are "Roastify AI", a brutally honest but helpful website critic. Respond in ${langMap[language] || "English"}.
 
 You MUST respond using the suggest_roast tool. Do not respond with plain text.
 
-Analyze the website based on the provided content and signals. Be specific about what you see. Reference actual elements from the page. Be savage but constructive.
+Analyze the website based on the provided content and signals. Be specific about what you see. Reference actual elements from the page. Be savage but constructive.${industryContext}
 
 Scoring guidelines:
 - Design (0-100): Visual hierarchy, typography, whitespace, color usage, modern feel
