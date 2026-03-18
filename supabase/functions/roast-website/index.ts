@@ -11,7 +11,7 @@ serve(async (req) => {
   }
 
   try {
-    const { url } = await req.json();
+    const { url, industry = 'general', language = 'en' } = await req.json();
     if (!url) {
       return new Response(JSON.stringify({ error: 'URL is required' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
