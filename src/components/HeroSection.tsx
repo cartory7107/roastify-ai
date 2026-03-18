@@ -18,6 +18,7 @@ const HeroSection = ({ onScrollToInput }: HeroSectionProps) => {
         <div className="flex items-center gap-2">
           <img src={roastifyLogo} alt="Roastify Logo" className="h-8 w-8" />
           <span className="text-sm font-bold text-foreground">Cartory Roastify AI</span>
+          <span className="ml-2 rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-flame-orange" style={{ background: "hsl(var(--flame-orange) / 0.12)", border: "1px solid hsl(var(--flame-orange) / 0.25)" }}>Part of Cartory (GOC)</span>
         </div>
         <LanguageSwitcher />
       </div>
