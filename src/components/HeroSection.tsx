@@ -14,11 +14,13 @@ const HeroSection = ({ onScrollToInput }: HeroSectionProps) => {
   return (
     <section className="relative flex min-h-[75vh] flex-col items-center justify-center px-4 pt-20 pb-12 text-center overflow-hidden">
       {/* Top nav bar */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2">
-          <img src={roastifyLogo} alt="Roastify Logo" className="h-8 w-8" />
-          <span className="text-sm font-bold text-foreground">Cartory Roastify AI</span>
-          <span className="ml-2 rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase text-flame-orange" style={{ background: "hsl(var(--flame-orange) / 0.12)", border: "1px solid hsl(var(--flame-orange) / 0.25)" }}>Part of Cartory (GOC)</span>
+      <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+        <div className="flex items-center gap-2.5">
+          <img src={roastifyLogo} alt="Roastify Logo" className="h-9 w-9 rounded-lg object-contain" />
+          <div className="flex flex-col">
+            <span className="text-sm font-bold text-foreground leading-tight">Cartory Roastify AI</span>
+            <span className="text-[9px] font-semibold tracking-wider uppercase text-flame-orange leading-tight">Part of Cartory (GOC)</span>
+          </div>
         </div>
         <LanguageSwitcher />
       </div>
