@@ -91,7 +91,7 @@ const Index = () => {
       {/* Ad space placeholder */}
       {result && (
         <div className="mx-auto max-w-3xl px-4 py-8">
-          <div className="flex items-center justify-center rounded-xl glass-surface h-24 text-xs text-muted-foreground">
+          <div className="flex items-center justify-center rounded-xl glass-surface h-24 text-xs text-muted-foreground" style={{ boxShadow: "inset 0 0 0 1px var(--stroke-subtle)" }}>
             Advertisement Space
           </div>
         </div>
