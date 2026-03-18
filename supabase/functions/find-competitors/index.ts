@@ -11,7 +11,7 @@ serve(async (req) => {
   }
 
   try {
-    const { url, industry = 'general', roastSummary = '', language = 'en' } = await req.json();
+    const { url, industry = 'general', roastSummary = '', language = 'en', userScores } = await req.json();
 
     const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
     if (!LOVABLE_API_KEY) {
@@ -28,23 +28,45 @@ serve(async (req) => {
     };
     const targetLang = langMap[language] || "English";
 
-    const systemPrompt = `You are a competitive analysis expert. Given a website URL and its industry, identify 2-3 REAL, well-known competitor websites in the same niche that are doing better. Respond in ${targetLang}.
+    // Pass user's ACTUAL scores so the AI uses them as the anchor
+    const userScoreStr = userScores
+      ? `The analyzed website's ACTUAL scores (already computed, DO NOT change these):
+  - Design: ${userScores.design}/100
+  - SEO: ${userScores.seo}/100
+  - Speed: ${userScores.speed}/100
+  - Conversion: ${userScores.conversion}/100
+  - Total: ${Math.round((userScores.design + userScores.seo + userScores.speed + userScores.conversion) / 4)}/100`
+      : '';
 
-You MUST respond using the find_competitors tool.
+    const systemPrompt = `You are a deterministic competitive analysis engine. You MUST follow these rules strictly:
+
+CRITICAL RULES:
+1. CONSISTENCY: The user's website scores are FIXED and provided to you. Do NOT re-score the user's site. Use the exact scores given.
+2. OBJECTIVITY: Score each competitor on the EXACT SAME 4 categories (design, seo, speed, conversion) using 0-100 scale.
+3. NO CONTRADICTIONS: If Competitor X scores higher than User's site, then when User's site is compared to Competitor X later, the relative ranking MUST remain the same.
+4. DATA-DRIVEN: Every advantage must reference specific, measurable factors (e.g., "faster load time", "proper heading hierarchy", "mobile-first responsive design"). Never use vague statements like "looks better" or "feels nicer".
+5. DETERMINISTIC: Given the same two websites, always produce the same relative scoring. Base scores on well-known public facts about these websites.
+
+Respond in ${targetLang}. Use the find_competitors tool.
 
 For each competitor:
-- Use a real, well-known website URL that actually exists
-- Explain specifically what they do better (design, SEO, UX, conversion, content, speed, branding)
-- Give each competitor a score estimate (0-100) vs the user's site
-- Be specific and actionable - reference real features/elements those competitors have
+- Use a REAL, well-known website URL
+- Score them on ALL 4 categories (design, seo, speed, conversion) individually
+- Explain specifically what they do better with measurable/specific details
+- Also note where the USER's site is better (if applicable)
 
-Be honest and helpful. The goal is to show the user who's winning in their space and WHY.`;
+SCORING GUIDELINES:
+- Major platforms (Google, YouTube, Amazon) generally score 80-95 on most categories
+- Mid-tier known sites score 60-80
+- Small/unknown sites score 30-60
+- Be realistic and consistent with publicly known information`;
 
     const userPrompt = `Website: ${url}
 Industry: ${industry}
+${userScoreStr}
 Known issues: ${roastSummary || 'General analysis needed'}
 
-Find 2-3 real competitor websites that are better than this site. Explain specifically what each competitor does better.`;
+Find 2-3 real competitor websites. Score each on the SAME 4 categories. Be consistent and data-driven.`;
 
     const aiResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
@@ -54,6 +76,7 @@ Find 2-3 real competitor websites that are better than this site. Explain specif
       },
       body: JSON.stringify({
         model: 'google/gemini-3-flash-preview',
+        temperature: 0.1, // Low temperature for consistency
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },
@@ -62,7 +85,7 @@ Find 2-3 real competitor websites that are better than this site. Explain specif
           type: 'function',
           function: {
             name: 'find_competitors',
-            description: 'Return competitor analysis with real competitor websites.',
+            description: 'Return competitor analysis with scores on the same 4 categories as the user site.',
             parameters: {
               type: 'object',
               properties: {
@@ -73,28 +96,52 @@ Find 2-3 real competitor websites that are better than this site. Explain specif
                     properties: {
                       name: { type: 'string', description: 'Competitor brand/website name' },
                       url: { type: 'string', description: 'Full competitor URL' },
-                      overallScore: { type: 'number', description: 'Estimated overall score 0-100' },
-                      userScore: { type: 'number', description: 'Estimated score of user site 0-100' },
+                      scores: {
+                        type: 'object',
+                        description: 'Scores on the same 4 categories',
+                        properties: {
+                          design: { type: 'number', description: 'Design score 0-100' },
+                          seo: { type: 'number', description: 'SEO score 0-100' },
+                          speed: { type: 'number', description: 'Speed score 0-100' },
+                          conversion: { type: 'number', description: 'Conversion score 0-100' },
+                        },
+                        required: ['design', 'seo', 'speed', 'conversion'],
+                        additionalProperties: false,
+                      },
                       advantages: {
                         type: 'array',
+                        description: 'Specific areas where this competitor is better than the user site',
                         items: {
                           type: 'object',
                           properties: {
-                            area: { type: 'string', description: 'Area name like Design, SEO, Speed, UX, Conversion, Content' },
-                            detail: { type: 'string', description: 'Specific explanation of what they do better' },
+                            area: { type: 'string', description: 'Category name: Design, SEO, Speed, or Conversion' },
+                            detail: { type: 'string', description: 'Specific, measurable explanation' },
+                          },
+                          required: ['area', 'detail'],
+                          additionalProperties: false,
+                        },
+                      },
+                      userAdvantages: {
+                        type: 'array',
+                        description: 'Areas where the USER site is better than this competitor (can be empty)',
+                        items: {
+                          type: 'object',
+                          properties: {
+                            area: { type: 'string' },
+                            detail: { type: 'string' },
                           },
                           required: ['area', 'detail'],
                           additionalProperties: false,
                         },
                       },
                     },
-                    required: ['name', 'url', 'overallScore', 'userScore', 'advantages'],
+                    required: ['name', 'url', 'scores', 'advantages', 'userAdvantages'],
                     additionalProperties: false,
                   },
                 },
-                summary: { type: 'string', description: 'One-line summary of competitive landscape' },
+                verdict: { type: 'string', description: 'One-line balanced verdict summarizing the competitive landscape with specific reasons' },
               },
-              required: ['competitors', 'summary'],
+              required: ['competitors', 'verdict'],
               additionalProperties: false,
             },
           },
@@ -117,6 +164,25 @@ Find 2-3 real competitor websites that are better than this site. Explain specif
     }
 
     const result = JSON.parse(toolCall.function.arguments);
+
+    // Inject user's actual scores into the response for the frontend
+    if (userScores) {
+      result.userScores = userScores;
+    }
+
+    // Compute total scores server-side for consistency
+    result.competitors = (result.competitors || []).map((comp: any) => {
+      const s = comp.scores || {};
+      comp.totalScore = Math.round((s.design + s.seo + s.speed + s.conversion) / 4);
+      return comp;
+    });
+
+    if (userScores) {
+      result.userTotalScore = Math.round(
+        (userScores.design + userScores.seo + userScores.speed + userScores.conversion) / 4
+      );
+    }
+
     return new Response(JSON.stringify(result), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
