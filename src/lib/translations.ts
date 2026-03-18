@@ -76,7 +76,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "showcase.competitor.title": "Competitor Analysis",
     "showcase.competitor.badge": "Pro Feature",
     "showcase.competitor.verdict": "Your competitor outperforms you in 3 key areas",
-    "showcase.brief.title": "Brief Analyzer",
+    "showcase.brief.title": "Premium Brief Analyzer",
     "showcase.brief.badge": "Pro Feature",
     "showcase.brief.problem": "Problem Found",
     "showcase.brief.problemText": "No clear CTA, weak heading hierarchy, mobile layout broken.",
