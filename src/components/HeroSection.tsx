@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Flame } from "lucide-react";
+import { Flame, User } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import roastifyLogo from "@/assets/roastify-logo.png";
 
