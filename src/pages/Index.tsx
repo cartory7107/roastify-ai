@@ -119,6 +119,7 @@ const Index = () => {
           )}
 
           <FixGenerator url={analyzedUrl} roastSummary={roastSummary} />
+          <BriefPromptEngine url={analyzedUrl} roastSummary={roastSummary} />
           <QuickWins tips={result.quickWins} />
           <ExportSection reportText={reportText} />
           <PaywallSection />
