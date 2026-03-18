@@ -10,6 +10,7 @@ import PaywallSection from "@/components/PaywallSection";
 import FooterSection from "@/components/FooterSection";
 import FixGenerator from "@/components/FixGenerator";
 import CompetitorComparison from "@/components/CompetitorComparison";
+import BriefPromptEngine from "@/components/BriefPromptEngine";
 import AIChat from "@/components/AIChat";
 import { generateReportText, getScanMessages, type RoastResult } from "@/lib/mockRoast";
 import { supabase } from "@/integrations/supabase/client";
@@ -118,6 +119,7 @@ const Index = () => {
           )}
 
           <FixGenerator url={analyzedUrl} roastSummary={roastSummary} />
+          <BriefPromptEngine url={analyzedUrl} roastSummary={roastSummary} />
           <QuickWins tips={result.quickWins} />
           <ExportSection reportText={reportText} />
           <PaywallSection />
