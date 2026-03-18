@@ -93,7 +93,23 @@ const About = () => {
             </div>
             <div>
               <p className="text-xs text-muted-foreground mb-0.5">WhatsApp</p>
-              <p className="text-sm font-medium text-green-400">Chat on WhatsApp</p>
+              <p className="text-sm font-medium text-green-400">+880 1843253599</p>
+            </div>
+          </a>
+
+          <a
+            href="https://wa.me/01843253599"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-surface glass-surface-hover group flex items-center gap-4 rounded-xl p-5 transition-all duration-300 hover:border-green-500/20"
+            style={{ boxShadow: "inset 0 0 0 1px var(--stroke-subtle)" }}
+          >
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-green-500/10 text-green-400 group-hover:bg-green-500/20 transition-colors">
+              <MessageCircle className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground mb-0.5">WhatsApp</p>
+              <p className="text-sm font-medium text-green-400">01843253599</p>
             </div>
           </a>
         </motion.div>
