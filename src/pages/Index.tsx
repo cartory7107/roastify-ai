@@ -106,6 +106,8 @@ const Index = () => {
       <HeroSection onScrollToInput={scrollToInput} />
       <URLInputSection ref={inputRef} onSubmit={handleSubmit} isLoading={isLoading} scanLogs={scanLogs} />
 
+      {!result && <FeatureShowcase onScrollToInput={scrollToInput} />}
+
       {result && (
         <>
           <ScoreDashboard scores={result.scores} />
