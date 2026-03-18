@@ -50,43 +50,24 @@ const FeatureShowcase = ({ onScrollToInput }: FeatureShowcaseProps) => {
       ),
     },
     {
-      icon: Camera,
-      title: t("showcase.screenshot.title"),
-      badge: t("showcase.screenshot.badge"),
+      icon: FileText,
+      title: t("showcase.brief.title"),
+      badge: t("showcase.brief.badge"),
       color: "fire-red",
       colorHsl: "var(--fire-red)",
       content: (
         <div className="space-y-3">
-          <div className="relative rounded-lg overflow-hidden bg-muted/30 p-3">
-            {/* Simulated screenshot with problem markers */}
-            <div className="space-y-2">
-              <div className="h-4 w-3/4 rounded bg-muted/50" />
-              <div className="h-3 w-full rounded bg-muted/30" />
-              <div className="h-3 w-5/6 rounded bg-muted/30" />
-              <div className="flex gap-2 pt-1">
-                <div className="h-6 w-20 rounded bg-muted/40" />
-                <div className="h-6 w-16 rounded bg-muted/40" />
-              </div>
-              <div className="h-3 w-full rounded bg-muted/30" />
-            </div>
-            {/* Red markers */}
-            <div className="absolute top-3 right-3 flex h-5 w-5 items-center justify-center rounded-full bg-fire-red text-[9px] font-bold text-white shadow-lg">1</div>
-            <div className="absolute top-10 left-6 flex h-5 w-5 items-center justify-center rounded-full bg-fire-red text-[9px] font-bold text-white shadow-lg">2</div>
-            <div className="absolute bottom-6 right-8 flex h-5 w-5 items-center justify-center rounded-full bg-flame-orange text-[9px] font-bold text-white shadow-lg">3</div>
+          <div className="rounded-lg bg-muted/20 px-3 py-2.5 space-y-2">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-fire-red">{t("showcase.brief.problem")}</div>
+            <p className="text-[11px] text-muted-foreground leading-relaxed">{t("showcase.brief.problemText")}</p>
           </div>
-          <div className="space-y-1.5 text-[10px]">
-            <div className="flex items-start gap-1.5">
-              <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-fire-red text-[8px] font-bold text-white">1</span>
-              <span className="text-muted-foreground">{t("showcase.screenshot.issue1")}</span>
-            </div>
-            <div className="flex items-start gap-1.5">
-              <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-fire-red text-[8px] font-bold text-white">2</span>
-              <span className="text-muted-foreground">{t("showcase.screenshot.issue2")}</span>
-            </div>
-            <div className="flex items-start gap-1.5">
-              <span className="inline-flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full bg-flame-orange text-[8px] font-bold text-white">3</span>
-              <span className="text-muted-foreground">{t("showcase.screenshot.issue3")}</span>
-            </div>
+          <div className="rounded-lg bg-success/5 px-3 py-2.5 space-y-2" style={{ border: "1px solid hsl(152 60% 45% / 0.15)" }}>
+            <div className="text-[10px] font-bold uppercase tracking-wider text-success">{t("showcase.brief.solution")}</div>
+            <p className="text-[11px] text-muted-foreground leading-relaxed">{t("showcase.brief.solutionText")}</p>
+          </div>
+          <div className="rounded-lg bg-flame-orange/5 px-3 py-2.5 space-y-1.5" style={{ border: "1px solid hsl(var(--flame-orange) / 0.15)" }}>
+            <div className="text-[10px] font-bold uppercase tracking-wider text-flame-orange">{t("showcase.brief.prompt")}</div>
+            <p className="text-[11px] text-foreground font-mono leading-relaxed">{t("showcase.brief.promptText")}</p>
           </div>
         </div>
       ),
