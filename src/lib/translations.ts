@@ -180,7 +180,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "showcase.competitor.title": "প্রতিযোগী বিশ্লেষণ",
     "showcase.competitor.badge": "প্রো ফিচার",
     "showcase.competitor.verdict": "আপনার প্রতিযোগী ৩টি মূল ক্ষেত্রে আপনাকে ছাড়িয়ে গেছে",
-    "showcase.brief.title": "ব্রিফ বিশ্লেষক",
+    "showcase.brief.title": "প্রিমিয়াম ব্রিফ বিশ্লেষক",
     "showcase.brief.badge": "প্রো ফিচার",
     "showcase.brief.problem": "সমস্যা পাওয়া গেছে",
     "showcase.brief.problemText": "কোনো স্পষ্ট CTA নেই, দুর্বল হেডিং, মোবাইল লেআউট ভাঙা।",
