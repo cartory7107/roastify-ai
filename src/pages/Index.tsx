@@ -12,6 +12,7 @@ import FixGenerator from "@/components/FixGenerator";
 import CompetitorComparison from "@/components/CompetitorComparison";
 import BriefPromptEngine from "@/components/BriefPromptEngine";
 import FeatureShowcase from "@/components/FeatureShowcase";
+import TopCompetitors from "@/components/TopCompetitors";
 import AIChat from "@/components/AIChat";
 import { generateReportText, getScanMessages, type RoastResult } from "@/lib/mockRoast";
 import { supabase } from "@/integrations/supabase/client";
