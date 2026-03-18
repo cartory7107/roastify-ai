@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BarChart3, Camera, Search, ArrowRight, Lock } from "lucide-react";
+import { BarChart3, FileText, Search, ArrowRight, Lock } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 
 interface FeatureShowcaseProps {
