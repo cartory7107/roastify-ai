@@ -284,7 +284,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "showcase.competitor.title": "Análisis de Competidores",
     "showcase.competitor.badge": "Función Pro",
     "showcase.competitor.verdict": "Tu competidor te supera en 3 áreas clave",
-    "showcase.brief.title": "Analizador de Soluciones",
+    "showcase.brief.title": "Analizador Premium de Soluciones",
     "showcase.brief.badge": "Función Pro",
     "showcase.brief.problem": "Problema Encontrado",
     "showcase.brief.problemText": "Sin CTA claro, jerarquía de títulos débil, diseño móvil roto.",
