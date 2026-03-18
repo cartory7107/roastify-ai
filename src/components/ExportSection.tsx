@@ -34,9 +34,9 @@ const ExportSection = ({ reportText }: ExportSectionProps) => {
     >
       <motion.button
         onClick={handleCopy}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="flex items-center gap-2 rounded-lg glass-surface px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted/30"
+        whileHover={{ scale: 1.03, boxShadow: "0 0 20px hsla(24, 100%, 50%, 0.3)" }}
+        whileTap={{ scale: 0.97 }}
+        className="flex items-center gap-2 rounded-xl glass-surface px-6 py-3 text-sm font-semibold text-foreground transition-all"
       >
         <AnimatePresence mode="wait">
           {copied ? (
@@ -53,9 +53,9 @@ const ExportSection = ({ reportText }: ExportSectionProps) => {
 
       <motion.button
         onClick={handleDownload}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="flex items-center gap-2 rounded-lg glass-surface px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted/30"
+        whileHover={{ scale: 1.03, boxShadow: "0 0 20px hsla(24, 100%, 50%, 0.3)" }}
+        whileTap={{ scale: 0.97 }}
+        className="flex items-center gap-2 rounded-xl glass-surface px-6 py-3 text-sm font-semibold text-foreground transition-all"
       >
         <FileDown className="h-4 w-4" strokeWidth={1.5} /> Download Report
       </motion.button>
