@@ -1,4 +1,5 @@
 import { useLanguage } from "@/lib/i18n";
+import { Link } from "react-router-dom";
 
 const FooterSection = () => {
   const { t } = useLanguage();
