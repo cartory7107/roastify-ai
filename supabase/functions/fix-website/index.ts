@@ -21,7 +21,10 @@ serve(async (req) => {
     }
 
     const langMap: Record<string, string> = {
-      en: "English", bn: "Bangla", es: "Spanish", it: "Italian",
+      en: "English", bn: "Bangla", es: "Spanish", fr: "French", de: "German",
+      it: "Italian", pt: "Portuguese", hi: "Hindi", ur: "Urdu",
+      zh: "Chinese (Simplified)", ja: "Japanese", ko: "Korean",
+      ar: "Arabic", tr: "Turkish", ru: "Russian", nl: "Dutch",
     };
 
     const systemPrompt = `You are a website improvement expert. Based on a website roast analysis, generate specific, actionable fixes. Respond in ${langMap[language] || "English"}.
