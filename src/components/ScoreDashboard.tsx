@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ScoreCircle from "./ScoreCircle";
+import HeatLevel from "./HeatLevel";
 
 interface Scores {
   design: number;
@@ -13,6 +14,8 @@ interface ScoreDashboardProps {
 }
 
 const ScoreDashboard = ({ scores }: ScoreDashboardProps) => {
+  const avgScore = Math.round((scores.design + scores.seo + scores.speed + scores.conversion) / 4);
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -20,10 +23,11 @@ const ScoreDashboard = ({ scores }: ScoreDashboardProps) => {
       transition={{ duration: 0.5 }}
       className="mx-auto max-w-3xl px-4 py-12"
     >
-      <h2 className="mb-8 text-center text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-        Performance Overview
+      <h2 className="mb-2 text-center text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+        🔥 Fire Scores
       </h2>
-      <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+      <HeatLevel score={avgScore} />
+      <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-4">
         <ScoreCircle score={scores.design} label="Design" color="" />
         <ScoreCircle score={scores.seo} label="SEO" color="" />
         <ScoreCircle score={scores.speed} label="Speed" color="" />
