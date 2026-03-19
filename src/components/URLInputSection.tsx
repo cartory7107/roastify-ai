@@ -91,36 +91,38 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
     const hasError = !!displayError;
 
     return (
-      <section ref={ref} className="relative mx-auto max-w-2xl px-4 py-16">
+      <section ref={ref} className="relative mx-auto max-w-2xl px-4 py-8 sm:py-16">
         <form onSubmit={handleSubmit} className="relative space-y-3">
           <div
-            className={`relative flex items-center gap-3 rounded-2xl p-2 transition-all duration-300 glass-surface ${
+            className={`relative flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 rounded-2xl p-2 sm:p-2 transition-all duration-300 glass-surface ${
               hasError
                 ? "ring-2 ring-destructive/60 shadow-[0_0_20px_hsla(0,80%,50%,0.15)]"
-                : "focus-within:ring-2 focus-within:ring-flame-orange/40"
+                : "focus-within:ring-2 focus-within:ring-flame-orange/40 focus-within:shadow-[0_0_24px_hsla(24,100%,50%,0.15)]"
             }`}
           >
-            <Flame className="ml-3 h-5 w-5 shrink-0 text-flame-orange/60" strokeWidth={1.5} />
-            <input
-              type="text"
-              value={url}
-              onChange={(e) => {
-                setUrl(e.target.value);
-                if (error) setError("");
-              }}
-              onBlur={() => setTouched(true)}
-              placeholder={t("input.placeholder")}
-              className="flex-1 bg-transparent py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
-              disabled={isLoading}
-              aria-invalid={hasError}
-              aria-describedby={hasError ? "url-error" : undefined}
-            />
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <Flame className="ml-2 sm:ml-3 h-5 w-5 shrink-0 text-flame-orange/60" strokeWidth={1.5} />
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                  if (error) setError("");
+                }}
+                onBlur={() => setTouched(true)}
+                placeholder={t("input.placeholder")}
+                className="flex-1 min-w-0 bg-transparent py-3 text-sm sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                disabled={isLoading}
+                aria-invalid={hasError}
+                aria-describedby={hasError ? "url-error" : undefined}
+              />
+            </div>
             <motion.button
               type="submit"
               disabled={isLoading}
               whileHover={!isLoading ? { scale: 1.02, boxShadow: "0 0 20px hsla(24, 100%, 50%, 0.4)" } : {}}
               whileTap={!isLoading ? { scale: 0.98 } : {}}
-              className="flex items-center gap-2 fire-gradient rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all disabled:opacity-60"
+              className="flex items-center justify-center gap-2 fire-gradient rounded-xl px-5 py-2.5 text-sm font-bold text-white transition-all disabled:opacity-60 w-full sm:w-auto shrink-0 hover:brightness-110"
             >
               {isLoading ? (
                 <><Loader2 className="h-4 w-4 animate-spin" />{t("input.scanning")}</>
@@ -195,7 +197,7 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
                     value={competitorUrl}
                     onChange={(e) => setCompetitorUrl(e.target.value)}
                     placeholder={t("competitor.placeholder")}
-                    className="flex-1 bg-transparent px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                    className="flex-1 min-w-0 bg-transparent px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
                     disabled={isLoading}
                   />
                 </div>
@@ -211,7 +213,7 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-4 overflow-hidden rounded-xl glass-surface p-4"
+              className="mt-4 overflow-hidden rounded-xl glass-surface p-3 sm:p-4"
               style={{ boxShadow: "inset 0 0 0 1px var(--stroke-fire), 0 0 20px hsla(24, 100%, 50%, 0.1)" }}
             >
               <div className="relative overflow-hidden">
@@ -232,3 +234,4 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
 
 URLInputSection.displayName = "URLInputSection";
 export default URLInputSection;
+
