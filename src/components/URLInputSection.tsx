@@ -228,6 +228,10 @@ const URLInputSection = forwardRef<HTMLDivElement, URLInputSectionProps>(
           )}
         </AnimatePresence>
       </section>
+    );
+  }
+);
 
 URLInputSection.displayName = "URLInputSection";
 export default URLInputSection;
+
