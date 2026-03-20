@@ -64,31 +64,35 @@ const AIChat = ({ websiteUrl, roastSummary }: AIChatProps) => {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 rounded-2xl glass-surface overflow-hidden"
-            style={{ boxShadow: "inset 0 0 0 1px var(--stroke-fire), 0 8px 40px rgba(0,0,0,0.6)", maxHeight: "70vh" }}
+            exit={{ opacity: 0, y: 24, scale: 0.96 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            className="fixed bottom-20 left-4 right-4 z-50 max-h-[75vh] overflow-hidden rounded-2xl border border-white/20 bg-black/45 shadow-2xl backdrop-blur-xl sm:bottom-24 sm:left-auto sm:right-6 sm:w-96"
+            style={{
+              backgroundImage:
+                "linear-gradient(160deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.08) 45%, rgba(0,0,0,0.35) 100%)",
+            }}
           >
             {/* Header */}
-            <div className="flex items-center gap-2 border-b border-border/30 px-4 py-3">
+            <div className="flex items-center gap-2 border-b border-white/15 bg-black/20 px-4 py-3">
               <div className="h-2 w-2 rounded-full bg-success animate-pulse" />
-              <span className="text-sm font-bold text-foreground">{t("chat.title")}</span>
+              <span className="text-sm font-bold text-white">{t("chat.title")}</span>
             </div>
 
             {/* Messages */}
-            <div ref={scrollRef} className="h-64 overflow-y-auto p-4 space-y-3">
+            <div ref={scrollRef} className="h-64 space-y-3 overflow-y-auto p-4 sm:h-72">
               {messages.length === 0 && (
-                <p className="text-xs text-muted-foreground text-center mt-8">
+                <p className="mt-8 px-2 text-center text-xs text-white/80">
                   {t("chat.placeholder")}
                 </p>
               )}
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[85%] rounded-xl px-3 py-2 text-xs leading-relaxed ${
+                  <div className={`max-w-[85%] rounded-xl px-3.5 py-2.5 text-xs leading-relaxed shadow-sm ${
                     msg.role === "user"
                       ? "fire-gradient text-white"
-                      : "bg-secondary text-foreground"
+                      : "border border-white/15 bg-black/40 text-white"
                   }`}>
                     {msg.content}
                   </div>
@@ -96,15 +100,15 @@ const AIChat = ({ websiteUrl, roastSummary }: AIChatProps) => {
               ))}
               {isLoading && (
                 <div className="flex justify-start">
-                  <div className="rounded-xl bg-secondary px-3 py-2">
-                    <Loader2 className="h-3 w-3 animate-spin text-muted-foreground" />
+                  <div className="rounded-xl border border-white/15 bg-black/40 px-3 py-2">
+                    <Loader2 className="h-3 w-3 animate-spin text-white/80" />
                   </div>
                 </div>
               )}
             </div>
 
             {/* Input */}
-            <div className="border-t border-border/30 p-3">
+            <div className="border-t border-white/15 bg-black/25 p-3">
               <form
                 onSubmit={(e) => { e.preventDefault(); handleSend(); }}
                 className="flex items-center gap-2"
@@ -113,7 +117,7 @@ const AIChat = ({ websiteUrl, roastSummary }: AIChatProps) => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={t("chat.placeholder")}
-                  className="flex-1 bg-transparent text-xs text-foreground placeholder:text-muted-foreground focus:outline-none"
+                  className="flex-1 rounded-lg border border-white/15 bg-black/40 px-3 py-2 text-xs text-white placeholder:text-white/60 focus:outline-none focus:ring-1 focus:ring-primary"
                   disabled={isLoading}
                 />
                 <motion.button
